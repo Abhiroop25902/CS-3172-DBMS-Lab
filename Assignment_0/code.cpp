@@ -6,8 +6,6 @@
 #include <iomanip>
 using namespace std;
 
-const string FILENAME = "./data.csv";
-
 // <----------------- Helper Struct and functions ----------------->
 /**
  * @brief return the line but bolded
@@ -104,7 +102,7 @@ void dataReader::readData()
     }
 }
 
-// <----------------- Class which displays ----------------->
+// <----------------- Class which displays and writes ----------------->
 class displayRecord
 {
     string companyName;
@@ -115,12 +113,15 @@ class displayRecord
     const short numSalesman = 6;
     void calculateSales();
 
+    //the writer ofstream
+    ofstream fout;
+
 public:
-    displayRecord(const string &comName, dataReader &d);
-    void display();
+    displayRecord(const string &comName, dataReader &d, const string &outputFilename);
+    void displayAndPrint();
 };
 
-displayRecord::displayRecord(const string &comName, dataReader &d)
+displayRecord::displayRecord(const string &comName, dataReader &d, const string &outputFilename)
     : companyName{comName}, records{d.getRecords()}
 {
     //company defined cost of product id
@@ -130,6 +131,7 @@ displayRecord::displayRecord(const string &comName, dataReader &d)
     productCodeToCost["D"] = 400;
 
     sales = vector<vector<int>>(numRegion + 1, vector<int>(numSalesman + 1, 0));
+    fout.open(outputFilename, ios::out);
     calculateSales();
 }
 
@@ -147,33 +149,41 @@ void displayRecord::calculateSales()
  * @brief print all region and salesman wise revenue generated
  * 
  */
-void displayRecord::display()
+void displayRecord::displayAndPrint()
 {
     cout << setw(45) << bold(underline(companyName)) << endl;
+    fout << setw(25) << companyName << endl;
 
     int sumSales;
     for (int i = 1; i <= numRegion; i++)
     {
         cout << bold(underline("Region " + to_string(i))) << endl;
+        fout << "Region " + to_string(i) << endl;
+
         sumSales = 0;
         for (int j = 1; j <= numSalesman; j++)
         {
-            cout << "Salesman " << j << "\t\t\tRs." << sales[i][j] << "/-\n";
+            cout << "Salesman " << j << "\t\t\t\t\tRs." << sales[i][j] << "/-\n";
+            fout << "Salesman " << j << "\t\t\t\t\tRs." << sales[i][j] << "/-\n";
             sumSales += sales[i][j];
         }
 
         cout << bold("Total sale at Region " + to_string(i))
              << "\t\t" << bold("Rs." + to_string(sumSales) + "/-") << "\n\n";
+        fout << "Total sale at Region " + to_string(i)
+             << "\t\t" << "Rs." + to_string(sumSales) + "/-" << "\n\n";
     }
 }
 
+const string INPUT_FILENAME = "./data.csv";
+const string OUTPUT_FILENAME = "./output.txt";
 int main()
 {
     //reader reads from csv
-    dataReader reader(FILENAME);
+    dataReader reader(INPUT_FILENAME);
     // display prints data in given format
-    displayRecord display("ABC Company", reader);
-    display.display();
+    displayRecord display("ABC Company", reader, OUTPUT_FILENAME);
+    display.displayAndPrint();
 
     return 0;
 }
