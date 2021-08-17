@@ -152,7 +152,7 @@ void displayRecord::calculateSales()
 void displayRecord::displayAndPrint()
 {
     cout << setw(45) << bold(underline(companyName)) << endl;
-    fout << setw(25) << companyName << endl;
+    fout << setw(27) << companyName << endl;
 
     int sumSales;
     for (int i = 1; i <= numRegion; i++)
@@ -163,8 +163,8 @@ void displayRecord::displayAndPrint()
         sumSales = 0;
         for (int j = 1; j <= numSalesman; j++)
         {
-            cout << "Salesman " << j << "\t\t\t\t\tRs." << sales[i][j] << "/-\n";
-            fout << "Salesman " << j << "\t\t\t\t\tRs." << sales[i][j] << "/-\n";
+            cout << "Salesman " << j << "\t\t\tRs." << sales[i][j] << "/-\n";
+            fout << "Salesman " << j << "\t\t\tRs." << sales[i][j] << "/-\n";
             sumSales += sales[i][j];
         }
 
