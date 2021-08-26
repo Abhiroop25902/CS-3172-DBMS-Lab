@@ -44,4 +44,5 @@ and the file will be executed
 ## Specials
 
 list all table = `\dt`
+describe table = `\d+ TABLE_NAME`
 
