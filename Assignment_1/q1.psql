@@ -33,37 +33,37 @@ CREATE TABLE crs_regd (
 );
 
 INSERT INTO depts VALUES ('CST', 'Computer Science and Technology');
-INSERT INTO depts VALUES ('IT', 'Information Technology');
+INSERT INTO depts VALUES ('ELE', 'Electrical Engineering');
 INSERT INTO depts VALUES ('ETC', 'Electronics and Telecommunication');
 INSERT INTO depts VALUES ('PH', 'Physics');
 INSERT INTO depts VALUES ('CH', 'Chemistry');
 
 INSERT INTO students VALUES (1, 'Abhiroop', '2002-09-25', 'CST', 8, 160000);
 INSERT INTO students VALUES (2, 'abc', '2001-09-25', 'ETC', 7, 180000);
-INSERT INTO students VALUES (3, 'bcd', '2001-08-25', 'IT', 6, 190000);
+INSERT INTO students VALUES (3, 'bcd', '2001-08-25', 'ELE', 6, 190000);
 INSERT INTO students VALUES (4, 'cde', '2001-08-26', 'CST', 9, 200000);
 INSERT INTO students VALUES (5, 'kjsd', '2001-09-25', 'ETC', 9, 250000);
-INSERT INTO students VALUES (92005102, 'skj', '2001-08-25', 'IT', 8, 220000);
+INSERT INTO students VALUES (92005102, 'skj', '2001-08-25', 'ELE', 8, 220000);
 INSERT INTO students VALUES (92005010, 'srg', '2000-08-26', 'CST', 9, 210000);
 
 INSERT INTO faculty VALUES ('CST_F1', 'dbp', 'CST');
 INSERT INTO faculty VALUES ('CST_F2', 'hed', 'CST');
-INSERT INTO faculty VALUES ('IT_F1', 'nls', 'IT');
-INSERT INTO faculty VALUES ('IT_F2', 'jst', 'IT');
+INSERT INTO faculty VALUES ('EE_F1', 'nls', 'ELE');
+INSERT INTO faculty VALUES ('EE_F2', 'jst', 'ELE');
 INSERT INTO faculty VALUES ('ETC_F1', 'eft', 'ETC');
 INSERT INTO faculty VALUES ('ETC_F2', 'fdj', 'ETC');
 INSERT INTO faculty VALUES ('PH_F1', 'sfgf', 'PH');
 INSERT INTO faculty VALUES ('CH_F1', 'poi', 'CH');
 
 
-INSERT INTO crs_offrd VALUES ('CST_C1', 'CST Course 1', 4, 'CST_F1');
-INSERT INTO crs_offrd VALUES ('CST_C2', 'CST Course 2', 5, 'CST_F2');
+INSERT INTO crs_offrd VALUES ('CST_C1', 'DBMS', 4, 'CST_F1');
+INSERT INTO crs_offrd VALUES ('CST_C2', 'OS', 5, 'CST_F2');
 INSERT INTO crs_offrd VALUES ('CST_C3', 'CST Course 3', 6, 'CST_F1');
 INSERT INTO crs_offrd VALUES ('CST_C4', 'CST Course 4', 7, 'CST_F2');
-INSERT INTO crs_offrd VALUES ('IT_C1', 'IT Course 1', 6, 'IT_F1');
-INSERT INTO crs_offrd VALUES ('IT_C2', 'IT Course 2', 7, 'IT_F2');
-INSERT INTO crs_offrd VALUES ('IT_C3', 'IT Course 3', 5, 'IT_F1');
-INSERT INTO crs_offrd VALUES ('IT_C4', 'IT Course 4', 4, 'IT_F2');
+INSERT INTO crs_offrd VALUES ('EE101', 'ELE Course 1', 6, 'EE_F1');
+INSERT INTO crs_offrd VALUES ('EE_C2', 'ELE Course 2', 7, 'EE_F2');
+INSERT INTO crs_offrd VALUES ('EE_C3', 'ELE Course 3', 5, 'EE_F1');
+INSERT INTO crs_offrd VALUES ('EE_C4', 'ELE Course 4', 4, 'EE_F2');
 INSERT INTO crs_offrd VALUES ('ETC_C1', 'ETC Course 1', 6, 'ETC_F1');
 INSERT INTO crs_offrd VALUES ('ETC_C2', 'ETC Course 2', 4, 'ETC_F2');
 INSERT INTO crs_offrd VALUES ('ETC_C3', 'ETC Course 3', 5, 'ETC_F1');
@@ -81,12 +81,12 @@ INSERT INTO crs_regd VALUES (2, 'ETC_C1', 89.4);
 INSERT INTO crs_regd VALUES (2, 'ETC_C2', 92.6);
 INSERT INTO crs_regd VALUES (2, 'ETC_C3', 87.7);
 INSERT INTO crs_regd VALUES (2, 'ETC_C4', 75.9);
+INSERT INTO crs_regd VALUES (2, 'EE101', 78.9);
 INSERT INTO crs_regd VALUES (2, 'PH106', 89.3);
 INSERT INTO crs_regd VALUES (2, 'CH103', 90.8);
-INSERT INTO crs_regd VALUES (3, 'IT_C1', 88.4);
-INSERT INTO crs_regd VALUES (3, 'IT_C2', 94.6);
-INSERT INTO crs_regd VALUES (3, 'IT_C3', 82.7);
-INSERT INTO crs_regd VALUES (3, 'IT_C4', 79.4);
+INSERT INTO crs_regd VALUES (3, 'EE_C2', 94.6);
+INSERT INTO crs_regd VALUES (3, 'EE_C3', 82.7);
+INSERT INTO crs_regd VALUES (3, 'EE_C4', 79.4);
 INSERT INTO crs_regd VALUES (3, 'PH106', 84.3);
 INSERT INTO crs_regd VALUES (3, 'CH103', 97.8);
 INSERT INTO crs_regd VALUES (4, 'CST_C1', 82.6);
@@ -101,10 +101,11 @@ INSERT INTO crs_regd VALUES (5, 'ETC_C3', 89.7);
 INSERT INTO crs_regd VALUES (5, 'ETC_C4', 76.9);
 INSERT INTO crs_regd VALUES (5, 'PH106', 82.8);
 INSERT INTO crs_regd VALUES (5, 'CH103', 95.9);
-INSERT INTO crs_regd VALUES (92005102, 'IT_C1', 89.4);
-INSERT INTO crs_regd VALUES (92005102, 'IT_C2', 93.6);
-INSERT INTO crs_regd VALUES (92005102, 'IT_C3', 86.7);
-INSERT INTO crs_regd VALUES (92005102, 'IT_C4', 70.4);
+INSERT INTO crs_regd VALUES (5, 'EE101', 72.9);
+INSERT INTO crs_regd VALUES (92005102, 'EE101', 89.4);
+INSERT INTO crs_regd VALUES (92005102, 'EE_C2', 93.6);
+INSERT INTO crs_regd VALUES (92005102, 'EE_C3', 86.7);
+INSERT INTO crs_regd VALUES (92005102, 'EE_C4', 70.4);
 INSERT INTO crs_regd VALUES (92005102, 'PH106', 88.8);
 INSERT INTO crs_regd VALUES (92005102, 'CH103', 91.9);
 INSERT INTO crs_regd VALUES (92005010, 'CST_C1', 83.6);
@@ -246,6 +247,50 @@ WHERE(
 	)
 );
 
+------------------------------------Assignment 3--------------------------------------
+
+--List students (rollno,name,deptcode) registered for course EE101.
+SELECT 
+	rollno,
+	name,
+	deptcode
+FROM
+	students, crs_regd
+WHERE
+	crs_rollno = rollno
+	AND crs_cd = 'EE101';
+
+-- List students (rollno,name) in ELE dept registered for course EE101.
+SELECT 
+	rollno,
+	name
+FROM
+	students, crs_regd
+WHERE
+	crs_rollno = rollno
+	AND deptcode = 'ELE'
+	AND crs_cd = 'EE101';
+
+-- List students (rollno,name) in ELE dept not registered for course EE101.
+-- Idea: (Students in ELE) - (Students in ELE registered for EE101) [ minus operator -> EXCEPT ]
+SELECT 
+	rollno,
+	name
+FROM
+	students, crs_regd
+WHERE
+	crs_rollno = rollno
+	AND deptcode = 'ELE'
+EXCEPT -- (- operator) [first part and second part converted to set before set minus, and output is a set also]
+SELECT 
+	rollno,
+	name
+FROM
+	students, crs_regd
+WHERE
+	crs_rollno = rollno
+	AND deptcode = 'ELE'
+	AND crs_cd = 'EE101';
 
 DROP TABLE crs_regd;
 DROP TABLE crs_offrd;
