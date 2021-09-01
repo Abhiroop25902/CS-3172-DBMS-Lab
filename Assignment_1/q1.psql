@@ -45,6 +45,8 @@ INSERT INTO students VALUES (4, 'cde', '2001-08-26', 'CST', 9, 200000);
 INSERT INTO students VALUES (5, 'kjsd', '2001-09-25', 'ETC', 9, 250000);
 INSERT INTO students VALUES (92005102, 'skj', '2001-08-25', 'ELE', 8, 220000);
 INSERT INTO students VALUES (92005010, 'srg', '2000-08-26', 'CST', 9, 210000);
+INSERT INTO students VALUES (6, 'ksm', '2001-08-26', 'ELE', 8, 260000);
+INSERT INTO students VALUES (7, 'master', '2001-09-26', 'ELE', 7, 280000);
 
 INSERT INTO faculty VALUES ('CST_F1', 'dbp', 'CST');
 INSERT INTO faculty VALUES ('CST_F2', 'hed', 'CST');
@@ -56,7 +58,7 @@ INSERT INTO faculty VALUES ('PH_F1', 'sfgf', 'PH');
 INSERT INTO faculty VALUES ('CH_F1', 'poi', 'CH');
 
 
-INSERT INTO crs_offrd VALUES ('CST_C1', 'DBMS', 4, 'CST_F1');
+INSERT INTO crs_offrd VALUES ('CS101', 'DBMS', 4, 'CST_F1');
 INSERT INTO crs_offrd VALUES ('CST_C2', 'OS', 5, 'CST_F2');
 INSERT INTO crs_offrd VALUES ('CST_C3', 'MIS', 6, 'CST_F1');
 INSERT INTO crs_offrd VALUES ('CST_C4', 'Software Engg.', 7, 'CST_F2');
@@ -71,7 +73,7 @@ INSERT INTO crs_offrd VALUES ('ETC_C4', 'ETC Course 4', 7, 'ETC_F2');
 INSERT INTO crs_offrd VALUES ('PH106', 'PH Course 1', 4, 'PH_F1');
 INSERT INTO crs_offrd VALUES ('CH103', 'CH Course 1', 3, 'CH_F1');
 
-INSERT INTO crs_regd VALUES (1, 'CST_C1', 89.6);
+INSERT INTO crs_regd VALUES (1, 'CS101', 89.6);
 INSERT INTO crs_regd VALUES (1, 'CST_C2', 98.6);
 INSERT INTO crs_regd VALUES (1, 'CST_C3', 67.6);
 INSERT INTO crs_regd VALUES (1, 'CST_C4', 95.6);
@@ -84,13 +86,13 @@ INSERT INTO crs_regd VALUES (2, 'ETC_C4', 75.9);
 INSERT INTO crs_regd VALUES (2, 'EE101', 78.9);
 INSERT INTO crs_regd VALUES (2, 'PH106', 89.3);
 INSERT INTO crs_regd VALUES (2, 'CH103', 90.8);
-INSERT INTO crs_regd VALUES (2, 'CST_C1', 92.8);
+INSERT INTO crs_regd VALUES (2, 'CS101', 92.8);
 INSERT INTO crs_regd VALUES (3, 'EE_C2', 94.6);
 INSERT INTO crs_regd VALUES (3, 'EE_C3', 82.7);
 INSERT INTO crs_regd VALUES (3, 'EE_C4', 79.4);
 INSERT INTO crs_regd VALUES (3, 'PH106', 84.3);
 INSERT INTO crs_regd VALUES (3, 'CH103', 97.8);
-INSERT INTO crs_regd VALUES (4, 'CST_C1', 82.6);
+INSERT INTO crs_regd VALUES (4, 'CS101', 82.6);
 INSERT INTO crs_regd VALUES (4, 'CST_C2', 68.6);
 INSERT INTO crs_regd VALUES (4, 'CST_C3', 63.6);
 INSERT INTO crs_regd VALUES (4, 'CST_C4', 90.6);
@@ -109,12 +111,27 @@ INSERT INTO crs_regd VALUES (92005102, 'EE_C3', 86.7);
 INSERT INTO crs_regd VALUES (92005102, 'EE_C4', 70.4);
 INSERT INTO crs_regd VALUES (92005102, 'PH106', 88.8);
 INSERT INTO crs_regd VALUES (92005102, 'CH103', 91.9);
-INSERT INTO crs_regd VALUES (92005010, 'CST_C1', 83.6);
+INSERT INTO crs_regd VALUES (92005010, 'CS101', 83.6);
 INSERT INTO crs_regd VALUES (92005010, 'CST_C2', 34.6);
 INSERT INTO crs_regd VALUES (92005010, 'CST_C3', 69.6);
 INSERT INTO crs_regd VALUES (92005010, 'CST_C4', 90.3);
 INSERT INTO crs_regd VALUES (92005010, 'PH106', 82.8);
 INSERT INTO crs_regd VALUES (92005010, 'CH103', 99.9);
+
+INSERT INTO crs_regd VALUES (7, 'CS101', 90.4);
+INSERT INTO crs_regd VALUES (7, 'CST_C2', 90.4);
+INSERT INTO crs_regd VALUES (7, 'CST_C3', 90.4);
+INSERT INTO crs_regd VALUES (7, 'CST_C4', 90.4);
+INSERT INTO crs_regd VALUES (7, 'ETC_C1', 90.4);
+INSERT INTO crs_regd VALUES (7, 'ETC_C2', 91.6);
+INSERT INTO crs_regd VALUES (7, 'ETC_C3', 89.7);
+INSERT INTO crs_regd VALUES (7, 'ETC_C4', 76.9);
+INSERT INTO crs_regd VALUES (7, 'PH106', 82.8);
+INSERT INTO crs_regd VALUES (7, 'CH103', 95.9);
+INSERT INTO crs_regd VALUES (7, 'EE101', 72.9);
+INSERT INTO crs_regd VALUES (7, 'EE_C2', 72.9);
+INSERT INTO crs_regd VALUES (7, 'EE_C3', 72.9);
+INSERT INTO crs_regd VALUES (7, 'EE_C4', 72.9);
 
 ------------------------------------Assignment 1--------------------------------------
 
@@ -315,21 +332,69 @@ WHERE
 
 -- Find the names of the faculty members who have offered either 'MIS' or 'Software Engg.'
 -- Idea: Union of faculty who offer MIS and faculty who offer Software
-SELECT
-	fac_name
-FROM
-	faculty, crs_offrd
-WHERE
-	crs_fac_cd = fac_code
+SELECT fac_name
+FROM faculty, crs_offrd
+WHERE 
+	crs_fac_cd = fac_code 
 	AND crs_name = 'MIS'
 UNION
-SELECT
-	fac_name
-FROM
-	faculty, crs_offrd
+SELECT fac_name
+FROM faculty, crs_offrd
 WHERE
 	crs_fac_cd = fac_code
 	AND crs_name = 'Software Engg.';
+
+-- Find the names of the faculty members who have offered 'MIS' but not offered 'Software Engg.'
+-- Idea: Set difference MIS - Software
+SELECT fac_name FROM faculty, crs_offrd 
+WHERE 
+	fac_code = crs_fac_cd 
+	AND crs_name = 'MIS' 
+EXCEPT 
+SELECT fac_name 
+FROM faculty, crs_offrd 
+WHERE 
+	fac_code = crs_fac_cd 
+	AND crs_name = 'Software Engg.';
+
+-- Find out the students in each hostel who are not registered for any course.
+-- Idea : join the crs_regd and student, the person with no data on of crs_rollno will be null
+SELECT rollno, name, hostel
+FROM students
+LEFT JOIN crs_regd ON (rollno = crs_rollno) 
+WHERE crs_rollno IS NULL ORDER BY hostel;
+-- NOTE: default where condition will not work here
+-- Note: The LEFT JOIN keyword returns all records from the left table, even if there are no matches in the right table. Very Important for this question
+
+-- Select the students who are in ELE dept or who have registered for course CS101.
+-- Idea: Union
+SELECT rollno,name,deptcode
+FROM students 
+WHERE deptcode = 'ELE' 
+UNION 
+SELECT rollno,name,deptcode 
+FROM students,crs_regd 
+WHERE 
+	rollno = crs_rollno 
+	AND crs_cd = 'CS101';
+
+-- Display the students who have registered to all the courses.
+-- Idea: group by crs_rollno, count(*) will give number of courses enrolled by that student
+SELECT crs_rollno, name, deptcode 
+FROM students, crs_regd
+WHERE rollno = crs_rollno
+GROUP BY crs_rollno, rollno 
+HAVING COUNT(*) = (SELECT COUNT(*) FROM crs_offrd);
+
+-- Give Grace Marks 5 in subject ‘DBMS’to the students who have scored less than 50 in that subject.
+-- Idea: Update Table
+UPDATE crs_regd 
+SET marks = marks + 5 
+FROM crs_offrd
+WHERE 
+	crs_code = crs_cd 
+	AND crs_name = 'DBMS' 
+	AND marks < 50;
 
 DROP TABLE crs_regd;
 DROP TABLE crs_offrd;
