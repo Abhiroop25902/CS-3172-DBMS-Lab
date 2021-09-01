@@ -58,8 +58,8 @@ INSERT INTO faculty VALUES ('CH_F1', 'poi', 'CH');
 
 INSERT INTO crs_offrd VALUES ('CST_C1', 'DBMS', 4, 'CST_F1');
 INSERT INTO crs_offrd VALUES ('CST_C2', 'OS', 5, 'CST_F2');
-INSERT INTO crs_offrd VALUES ('CST_C3', 'CST Course 3', 6, 'CST_F1');
-INSERT INTO crs_offrd VALUES ('CST_C4', 'CST Course 4', 7, 'CST_F2');
+INSERT INTO crs_offrd VALUES ('CST_C3', 'MIS', 6, 'CST_F1');
+INSERT INTO crs_offrd VALUES ('CST_C4', 'Software Engg.', 7, 'CST_F2');
 INSERT INTO crs_offrd VALUES ('EE101', 'ELE Course 1', 6, 'EE_F1');
 INSERT INTO crs_offrd VALUES ('EE_C2', 'ELE Course 2', 7, 'EE_F2');
 INSERT INTO crs_offrd VALUES ('EE_C3', 'ELE Course 3', 5, 'EE_F1');
@@ -84,6 +84,7 @@ INSERT INTO crs_regd VALUES (2, 'ETC_C4', 75.9);
 INSERT INTO crs_regd VALUES (2, 'EE101', 78.9);
 INSERT INTO crs_regd VALUES (2, 'PH106', 89.3);
 INSERT INTO crs_regd VALUES (2, 'CH103', 90.8);
+INSERT INTO crs_regd VALUES (2, 'CST_C1', 92.8);
 INSERT INTO crs_regd VALUES (3, 'EE_C2', 94.6);
 INSERT INTO crs_regd VALUES (3, 'EE_C3', 82.7);
 INSERT INTO crs_regd VALUES (3, 'EE_C4', 79.4);
@@ -291,6 +292,44 @@ WHERE
 	crs_rollno = rollno
 	AND deptcode = 'ELE'
 	AND crs_cd = 'EE101';
+
+-- List the names of the students who have registered for both the courses 'DBMS' and 'OS'.
+-- Idea: set intersection between DBMS and OS 
+SELECT
+	name
+FROM
+	students, crs_regd, crs_offrd
+WHERE
+	crs_rollno = rollno
+	AND crs_cd = crs_code
+	AND crs_offrd.crs_name = 'DBMS'
+INTERSECT --intersection
+SELECT
+	name
+FROM
+	students, crs_regd, crs_offrd
+WHERE
+	crs_rollno = rollno
+	AND crs_cd = crs_code
+	AND crs_offrd.crs_name = 'OS';
+
+-- Find the names of the faculty members who have offered either 'MIS' or 'Software Engg.'
+-- Idea: Union of faculty who offer MIS and faculty who offer Software
+SELECT
+	fac_name
+FROM
+	faculty, crs_offrd
+WHERE
+	crs_fac_cd = fac_code
+	AND crs_name = 'MIS'
+UNION
+SELECT
+	fac_name
+FROM
+	faculty, crs_offrd
+WHERE
+	crs_fac_cd = fac_code
+	AND crs_name = 'Software Engg.';
 
 DROP TABLE crs_regd;
 DROP TABLE crs_offrd;
