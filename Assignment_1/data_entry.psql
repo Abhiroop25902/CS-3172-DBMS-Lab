@@ -1,9 +1,3 @@
-DROP TABLE crs_regd;
-DROP TABLE crs_offrd;
-DROP TABLE faculty;
-DROP TABLE students;
-DROP TABLE depts;
-
 CREATE TABLE depts (
 	deptcode varchar(3) PRIMARY KEY,
 	deptname varchar(50) NOT NULL
