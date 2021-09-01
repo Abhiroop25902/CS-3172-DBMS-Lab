@@ -82,6 +82,16 @@ WHERE crs_rollno IS NULL ORDER BY hostel;
 -- NOTE: default where condition will not work here
 -- Note: The LEFT JOIN keyword returns all records from the left table, even if there are no matches in the right table. Very Important for this question
 
+
+--Idea2: student.rollno - crs_regd.crs_rollno will give us a set of roll_no who has no subject
+SELECT rollno, name, hostel 
+FROM students
+WHERE rollno in (	SELECT rollno FROM students
+					EXCEPT
+					SELECT DISTINCT crs_rollno FROM crs_regd);
+
+
+
 -- Select the students who are in ELE dept or who have registered for course CS101.
 -- Idea: Union
 SELECT rollno,name,deptcode
