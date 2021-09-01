@@ -114,6 +114,8 @@ INSERT INTO crs_regd VALUES (92005010, 'CST_C4', 90.3);
 INSERT INTO crs_regd VALUES (92005010, 'PH106', 82.8);
 INSERT INTO crs_regd VALUES (92005010, 'CH103', 99.9);
 
+------------------------------------Assignment 1--------------------------------------
+
 -- -- delete record from student whose deptcode = 'CST'
 -- SELECT * 
 -- FROM students;
@@ -125,14 +127,15 @@ INSERT INTO crs_regd VALUES (92005010, 'CH103', 99.9);
 -- FROM students;
 
 
--- Find out the courses offered by the faculty dbp and nls.\
+-- Find out the courses offered by the faculty dbp and nls.
 SELECT crs_code
 FROM
 	faculty,
 	crs_offrd
 WHERE
 	faculty.fac_code = crs_offrd.crs_fac_cd
-	AND (faculty.fac_name = 'dbp'
+	AND (
+		faculty.fac_name = 'dbp'
 		OR faculty.fac_name = 'nls');
 
 -- Find out the courses with full details offered by dbp.
@@ -154,6 +157,8 @@ SELECT crs_code
 FROM crs_offrd
 WHERE crs_credits > 6.5;
 
+------------------------------------Assignment 2--------------------------------------
+
 -- Count the number of students in CSE dept.
 SELECT count(*)
 FROM students
@@ -170,10 +175,10 @@ FROM
 	crs_regd,
 	crs_offrd
 WHERE crs_regd.crs_cd = crs_offrd.crs_code
-GROUP BY (crs_cd, crs_name)
+GROUP BY (crs_cd, crs_name) -- crs_name here only because I wanted crs_name to be displayed, also we can say that pair (crs_cd, crs_name) will be unique
 ORDER BY crs_cd;
 
---Determine the total credits of the courses registered by a student.
+--Determine the total credits of the courses registered by a student. (Assuming total credit gained by the student)
 SELECT 
 	crs_regd.crs_rollno as roll_no,
 	sum(crs_offrd.crs_credits * crs_regd.marks/100) as total_credits
@@ -190,8 +195,7 @@ FROM students
 WHERE deptcode = 'CST'
 GROUP BY hostel;
 
--- Display the hostel,rollno,parent_inc of the student who has the max(parent_inc) 
--- in a hostel.
+-- Display the hostel,rollno,parent_inc of the student who has the max(parent_inc) in a hostel.
 SELECT
 	hostel,
 	rollno,
@@ -214,13 +218,6 @@ WHERE parent_inc > (SELECT parent_inc
 
 -- Find out marks of students who have marks more than
 -- rollno 92005102 for course CH103 and PH106.
-
--- CREATE TABLE crs_regd (
--- 	crs_rollno numeric(8) REFERENCES students (rollno),
--- 	crs_cd char(10) REFERENCES crs_offrd (crs_code),
--- 	marks numeric(5, 2),
--- 	PRIMARY KEY (crs_rollno, crs_cd)
--- );
 
 SELECT 
 	crs_rollno,
