@@ -1,22 +1,15 @@
 ------------------------------------Assignment 3--------------------------------------
 
 --List students (rollno,name,deptcode) registered for course EE101.
-SELECT 
-	rollno,
-	name,
-	deptcode
-FROM
-	students, crs_regd
+SELECT	rollno,name,deptcode
+FROM	students, crs_regd
 WHERE
 	crs_rollno = rollno
 	AND crs_cd = 'EE101';
 
 -- List students (rollno,name) in ELE dept registered for course EE101.
-SELECT 
-	rollno,
-	name
-FROM
-	students, crs_regd
+SELECT 	rollno,name
+FROM	students, crs_regd
 WHERE
 	crs_rollno = rollno
 	AND deptcode = 'ELE'
@@ -24,20 +17,14 @@ WHERE
 
 -- List students (rollno,name) in ELE dept not registered for course EE101.
 -- Idea: (Students in ELE) - (Students in ELE registered for EE101) [ minus operator -> EXCEPT ]
-SELECT 
-	rollno,
-	name
-FROM
-	students, crs_regd
+SELECT	rollno,name
+FROM	students, crs_regd
 WHERE
 	crs_rollno = rollno
 	AND deptcode = 'ELE'
 EXCEPT -- (- operator) [first part and second part converted to set before set minus, and output is a set also]
-SELECT 
-	rollno,
-	name
-FROM
-	students, crs_regd
+SELECT	rollno,name
+FROM	students, crs_regd
 WHERE
 	crs_rollno = rollno
 	AND deptcode = 'ELE'
@@ -45,19 +32,15 @@ WHERE
 
 -- List the names of the students who have registered for both the courses 'DBMS' and 'OS'.
 -- Idea: set intersection between DBMS and OS 
-SELECT
-	name
-FROM
-	students, crs_regd, crs_offrd
+SELECT	name
+FROM	students, crs_regd, crs_offrd
 WHERE
 	crs_rollno = rollno
 	AND crs_cd = crs_code
 	AND crs_offrd.crs_name = 'DBMS'
 INTERSECT --intersection
-SELECT
-	name
-FROM
-	students, crs_regd, crs_offrd
+SELECT	name
+FROM	students, crs_regd, crs_offrd
 WHERE
 	crs_rollno = rollno
 	AND crs_cd = crs_code
