@@ -1,0 +1,29 @@
+-- Retrieve the name of the student(s) who obtained second highest marks in ‘DBMS’.
+-- Idea: ordet by has limit and offset
+-- limit: limit no.of outputs
+-- offset: generally starting point is start, offset x increses starting point by x no. of rows
+select name
+from students, crs_regd, crs_offrd
+where   
+    crs_rollno = rollno
+    and crs_cd = crs_code
+    and crs_name = 'DBMS'
+order by marks desc limit 1 offset 1;
+
+
+-- Find out the differences between highest and lowest marks obtained in each subject.
+select crs_cd,max(marks) - min(marks) as mark_diff
+from crs_regd
+group by crs_cd
+order by crs_cd;
+
+-- Assuming the existance of several interdepartmental courses, retrieve the
+-- name of the student(s) who is(are) studing under at least one faculty from
+-- each department.
+
+
+
+
+-- Assuming the existance of several interdepartmental courses, retrieve the
+-- name of the student(s) who is(are) studing under the faculties only from
+-- his(their) own department.
