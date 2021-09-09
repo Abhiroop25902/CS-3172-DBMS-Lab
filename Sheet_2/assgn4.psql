@@ -11,7 +11,7 @@ where name like 'S%r_';
 -- Retrieve the name of the youngest student(s) from the ‘CST’ department
 -- along with the total marks obtained by him (them).
 -- Hint: youngest age will have largest year
-select name, sum(marks)
+select name, bdate, sum(marks)
 from students, crs_regd
 where crs_rollno = rollno
 and deptcode = 'CST'
