@@ -2,13 +2,19 @@
 -- Idea: ordet by has limit and offset
 -- limit: limit no.of outputs
 -- offset: generally starting point is start, offset x increses starting point by x no. of rows
-select name
+-- NOTE: direct order then limit 1 offset 1 can give wring result when there are mutiple student with max marks in DBMS 
+select rollno, name, marks, crs_cd 
 from students, crs_regd, crs_offrd
 where   
     crs_rollno = rollno
     and crs_cd = crs_code
     and crs_name = 'DBMS'
-order by marks desc limit 1 offset 1;
+    and marks = (   select distinct(marks)
+                    from crs_regd, crs_offrd
+                    where crs_cd = crs_code
+                    and crs_name = 'DBMS'
+                    order by marks desc limit 1 offset 1);
+
 
 
 -- Find out the differences between highest and lowest marks obtained in each subject.
