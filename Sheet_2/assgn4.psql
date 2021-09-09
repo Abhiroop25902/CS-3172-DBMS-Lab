@@ -14,6 +14,7 @@ where name like 'S%r_';
 select name, sum(marks)
 from students, crs_regd
 where crs_rollno = rollno
+and deptcode = 'CST'
 group by rollno
 having bdate = ( select max(bdate)
                 from students
