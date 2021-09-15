@@ -35,6 +35,20 @@ from    students
 group by name
 having count(distinct fac_dept) = (select count(*) from depts);
 
+-- Another Possible Solution
+SELECT 
+        name
+FROM 
+        crs_offrd
+        ,faculty
+        ,crs_regd
+        ,students
+WHERE 
+        crs_fac_cd=fac_code
+        AND crs_cd=crs_code
+        AND crs_rollno=rollno
+GROUP BY name
+HAVING COUNT(DISTINCT(fac_dept)) = (SELECT COUNT(*) FROM depts);
 
 
 -- Assuming the existance of several interdepartmental courses, retrieve the
@@ -80,3 +94,17 @@ from
                 having count(distinct fac_dept) = 1
         ) as tb
 where deptcode = fac_dept;
+
+-- Another possible Solution
+SELECT rollno, name 
+FROM students 
+WHERE rollno NOT IN (SELECT DISTINCT(rollno) 
+                      FROM crs_offrd, faculty, crs_regd, students 
+                      WHERE crs_fac_cd=fac_code 
+                      AND crs_cd=crs_code 
+                      AND crs_rollno=rollno 
+                      AND fac_dept!=deptcode 
+                      GROUP BY rollno
+                      
+                      UNION 
+                      ((select rollno from students) EXCEPT (select distinct crs_rollno from crs_regd)));
