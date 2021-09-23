@@ -50,14 +50,14 @@ INSERT INTO students VALUES (14, 'Vanika', '2002-9-01', 'MECH', 8, 14000);
 
 -- Delete a student (for a given Name) of the same department
 delete from students
-where rollno = 14;
+where name = 'Vanika';
 -- Analysis: removed from view also
 
 
 -- Shift a student (for a given Name) from Mechanical to Computer Science.
 update students 
 set deptcode = 'CST'
-where rollno = 13;
+where name = 'Vani';
 -- Analysis: roll 13 got removed from mech_stud but now visible in cse_stud
 
 select * from mech_stud;
