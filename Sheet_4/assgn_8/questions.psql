@@ -60,3 +60,44 @@ having count(distinct cust_id) =    (
                                     );
 
 -- 7)   For each city, what is the maximum weight of a package sent to that city?
+-- Left join cause we want to also show cities who don't have any shipment
+select
+    city_name, max(weight)
+from
+    City left join Shipment on destination = city_name  
+group by city_name;
+
+-- 8)   List the name and annual revenue of customers whose shipments have been delivered
+-- by truck driver ‘IQBAL’.
+select 
+    cust_name, annual_revenue 
+from
+    Customer natural join Shipment natural join Truck
+where
+    driver_name = 'Iqbal'
+group by (cust_name, annual_revenue); --group by done to remove dublicates
+
+-- 9) List drivers who have delivered shipments to every city.
+select 
+    truck_no,
+    driver_name
+from 
+    Shipment natural join Truck
+group by truck_no, driver_name  --driver_name just cause I want to print
+having count(distinct destination) =    (
+                                            select
+                                                count(*)
+                                            from
+                                                City
+                                        );
+
+-- 10) For each city, with population over 1 million, what is the minimum weight of a
+-- package sent to that city.    
+select
+    city_name, min(weight)
+from      
+    Shipment, City 
+where
+    destination = city_name
+group by city_name
+having population > 1000000;                            
