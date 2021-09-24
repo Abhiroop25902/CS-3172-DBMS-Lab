@@ -44,6 +44,7 @@ insert into City values ('Mumbai',12500000);
 insert into City values ('Kolkata', 14900000);
 insert into City values ('Chennai', 11235018);
 insert into City values ('Hyderabad', 102686);
+-- insert into City values ('Pune', 1842686);  -- used for q7
 
 -- 25th
 insert into Shipment values(5001, 1001, 250, 4001, 'Mumbai', '2021-09-25');
@@ -74,4 +75,6 @@ insert into Shipment values(5006, 1002, 150, 4001, 'Chennai', '2021-09-26');
 insert into Shipment values(5007, 2001, 400, 4001, 'Kolkata', '2021-09-26');
 insert into Shipment values(5007, 3002, 84, 4001, 'Kolkata', '2021-09-26');
 
-insert into Shipment values(5008, 2002, 63, 4003, 'Hyderabad', '2021-09-26');
+insert into Shipment values(5008, 1002, 63, 4003, 'Hyderabad', '2021-09-26');
+insert into Shipment values(5008, 2002, 74, 4003, 'Hyderabad', '2021-09-26');
+insert into Shipment values(5008, 3002, 26, 4003, 'Hyderabad', '2021-09-26');
