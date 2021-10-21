@@ -39,7 +39,8 @@ from EMP
 group by MGR
 having
     MGR is not null
-    and min(SAL) < 1000;
+    and min(SAL) < 1000
+order by min_salary desc;
 
 -- Assume that there are some departments where no employee is assigned. Now, write
 -- a query to display the department name, location name, number of employees, and the
