@@ -56,3 +56,26 @@ select
     coalesce(round(avg(SAL),2),0.0) as "AVERAGE SALARY"
 from DEPT left join EMP on (EMP.DEPTNO = DEPT.DEPTNO)
 group by DNAME, LOC;
+
+
+-------------------------------------- Practices---------------------
+-- Display status of employee who has salary more than 
+-- avg salary of their department
+
+select
+    EMPNO,
+    ENAME,
+    SAL,
+    DEPTNO,
+    avg_sal
+from
+    EMP 
+    natural join    (
+                        select 
+                            DEPTNO, 
+                            avg(SAL) as avg_sal
+                        from EMP
+                        group by DEPTNO
+                    ) as average_employee
+    where 
+    SAL > avg_sal;
