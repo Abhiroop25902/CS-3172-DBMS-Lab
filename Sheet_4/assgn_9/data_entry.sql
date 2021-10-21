@@ -14,18 +14,10 @@ insert into DEPT values ('D002', 'Sales', 'Hyderabad');
 insert into DEPT values ('D003', 'Research', 'Chandigarh');
 insert into DEPT values ('D004', 'Operations', 'Kolkata');
 
-
 create table EMP(
     EMPNO numeric(10) primary key check(EMPNO between 7000 and 8000),
     ENAME varchar(10), --varchar(10) checks ENAME must not exceed 10 characters
-    JOB varchar(10) check (
-                            JOB = 'President'
-                            OR JOB = 'Manager'
-                            OR JOB = 'Clerk'
-                            OR JOB = 'Salesman'
-                            OR JOB = 'Analyst'
-                            ),
-    -- set in operator doesn't seems to work with strings
+    JOB varchar(10) check ( JOB in ('President', 'Manager', 'Clerk', 'Salesman', 'Analyst')),
     MGR numeric(10),    --manager emp id
     HIREDATE date,
     SAL numeric(10),
