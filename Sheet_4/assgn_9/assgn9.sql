@@ -53,10 +53,27 @@ order by min_salary desc;
 select
     DNAME as "DNAME", 
     LOC as "LOCATION",
-    count(*) as "NUMBER OF PEOPLE",
+    count(EMPNO) as "NUMBER OF PEOPLE",
     coalesce(round(avg(SAL),2),0.0) as "AVERAGE SALARY"
 from DEPT left join EMP on (EMP.DEPTNO = DEPT.DEPTNO)
 group by DNAME, LOC;
+
+---------------another method----------------
+select 
+    DNAME as "DNAME", 
+    LOC as "LOCATION",
+    (
+        select count(*)
+        from EMP
+        where EMP.DEPTNO = DEPT.DEPTNO
+    ) as "NUMBER OF PEOPLE",
+    (
+        select round(coalesce(avg(sal), 0.0), 2)
+        from EMP
+        where EMP.DEPTNO = DEPT.DEPTNO
+    ) as "AVERAGE SALARY"
+from DEPT;
+
 
 
 -------------------------------------- Practices---------------------
