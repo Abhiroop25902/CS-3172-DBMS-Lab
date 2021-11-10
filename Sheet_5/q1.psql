@@ -1,25 +1,28 @@
-CREATE TABLE circle(
+create table circle(
     radius real,
     circumference real
 );
 
 -- $$ -> consider as braces
-CREATE FUNCTION insertIntoCircle(radius int) RETURNS real AS $$
-    DECLARE
-        circumference DOUBLE PRECISION := 2 * pi() * radius;
-    BEGIN
-        INSERT INTO circle VALUES (radius, circumference);
-        RETURN circumference;
-    END;
-$$ LANGUAGE plpgsql;
+create function insertIntoCircle(radius numeric(6,4)) 
+    returns void
+    language plpgsql as $$
+        begin
+            insert into circle values (radius, 2 * pi() * radius);
+        end;
+$$ ;
+    
 
-
-select(insertIntoCircle(3));
-select(insertIntoCircle(5));
-select(insertIntoCircle(10));
+do $$
+    begin
+        for counter in 1..10 by 2 loop
+            perform insertIntoCircle(counter);
+        end loop;
+    end;
+$$;
 
 select * from circle;
 
-drop FUNCTION insertIntoCircle;
+drop function insertIntoCircle;
 drop table circle;
 
