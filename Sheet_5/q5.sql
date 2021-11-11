@@ -10,8 +10,7 @@ insert into emp values (510719010, 900000);
 
 select * from emp order by emp;
 
-create or replace function raiseWage(in id numeric(10), in amount numeric(10))
-    returns void 
+create or replace procedure raiseWage(in id numeric(10), in amount numeric(10))
     language plpgsql as $$
         begin
             if(id not in (select E.emp_id from emp E)) then
@@ -28,8 +27,8 @@ create or replace function raiseWage(in id numeric(10), in amount numeric(10))
         end;
     $$;
 
-select raiseWage(510719010,1000);
+call raiseWage(510719010,1000);
 
 select * from emp order by emp;
-drop function raiseWage;
+drop procedure raiseWage;
 drop table emp;
