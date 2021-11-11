@@ -20,7 +20,7 @@ create or replace function processEdit()
                 update item_mstr set quantity = new.quantity where item_id = new.item_id;
             end if;
 
-            return new; -- use of trigger return is valid on before trigger only
+            return null; -- use of trigger return is valid on before trigger only
         end;
     $$;
 
