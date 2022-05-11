@@ -26,7 +26,7 @@ CREATE TABLE crs_offrd (
 );
 
 CREATE TABLE crs_regd (
-	crs_rollno numeric(8) REFERENCES students (rollno),
+	crs_rollno numeric(8) REFERENCES students (rollno) ON DELETE CASCADE,
 	crs_cd char(10) REFERENCES crs_offrd (crs_code),
 	marks numeric(5, 2),
 	PRIMARY KEY (crs_rollno, crs_cd)
